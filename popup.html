@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>TermKeeper</title>
+</head>
+<body>
+  <div class="app">
+    <header class="head">
+      <div class="logo">T</div>
+      <div class="meta">
+        <div class="name">TermKeeper<span class="ver" id="ver">v0.2.0</span></div>
+        <div class="tagline">技术文档翻译 · 专业术语保持原文</div>
+      </div>
+    </header>
+
+    <div id="blocked" class="blocked hidden">
+      当前页面不支持翻译（浏览器内置页面或扩展商店）
+    </div>
+
+    <main id="main">
+      <button id="toggle" class="btn-primary">翻译此网站</button>
+
+      <div class="card" id="progressCard">
+        <div class="pc-row">
+          <span class="pc-state" id="s-state">未翻译</span>
+          <span class="pc-count" id="s-progress">—</span>
+        </div>
+        <div class="bar"><i id="s-bar"></i></div>
+        <div class="pc-row sub">
+          <span id="s-terms">—</span>
+          <span class="chip" id="s-domain">—</span>
+        </div>
+      </div>
+
+      <div class="opts">
+        <div class="row">
+          <label for="display">显示方式</label>
+          <div class="sel">
+            <select id="display">
+              <option value="translated">仅译文</option>
+              <option value="both">原文 + 译文</option>
+              <option value="original">仅原文</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="site">本站自动翻译</label>
+          <label class="switch">
+            <input type="checkbox" id="site" />
+            <span class="track"></span>
+          </label>
+        </div>
+
+        <div class="row">
+          <label for="ask">进站时询问</label>
+          <label class="switch">
+            <input type="checkbox" id="ask" />
+            <span class="track"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="tip" id="tip"></div>
+    </main>
+
+    <footer class="foot">
+      <a href="#" id="openOptions">设置</a>
+      <span class="keys"><kbd>Alt</kbd>+<kbd>T</kbd> 翻译</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

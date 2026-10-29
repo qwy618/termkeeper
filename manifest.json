@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "TermKeeper · 术语守护",
+  "version": "0.2.0",
+  "description": "技术文档双语对照翻译：专有名词不译、代码不污染、原文永远保留。",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://cn.bing.com/*",
+    "https://www.bing.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TermKeeper",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "toggle-translate": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "翻译 / 还原当前页面"
+    },
+    "refine-viewport": {
+      "suggested_key": {
+        "default": "Alt+E"
+      },
+      "description": "用 AI 精修当前可视区段落"
+    },
+    "cycle-mode": {
+      "suggested_key": {
+        "default": "Alt+Shift+T"
+      },
+      "description": "切换显示模式（对照 / 仅译文 / 仅原文）"
+    }
+  }
+}

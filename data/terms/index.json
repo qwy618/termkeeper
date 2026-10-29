@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-28T06:21:23.563Z",
+  "total": 1001,
+  "domains": [
+    {
+      "id": "common",
+      "name": "通用技术",
+      "file": "common.json",
+      "count": 170,
+      "fingerprints": []
+    },
+    {
+      "id": "frontend",
+      "name": "前端",
+      "file": "domains/frontend.json",
+      "count": 91,
+      "fingerprints": [
+        "DOM",
+        "React",
+        "Vue",
+        "props",
+        "hydration",
+        "JSX",
+        "bundle",
+        "webpack",
+        "Vite",
+        "SSR",
+        "component"
+      ]
+    },
+    {
+      "id": "backend-jvm",
+      "name": "Java / JVM",
+      "file": "domains/backend-jvm.json",
+      "count": 82,
+      "fingerprints": [
+        "Bean",
+        "IoC",
+        "autowiring",
+        "JVM",
+        "Spring",
+        "Maven",
+        "Gradle",
+        "JPA",
+        "Hibernate",
+        "MyBatis",
+        "ApplicationContext"
+      ]
+    },
+    {
+      "id": "backend-py",
+      "name": "Python 后端",
+      "file": "domains/backend-py.json",
+      "count": 43,
+      "fingerprints": [
+        "Django",
+        "Flask",
+        "FastAPI",
+        "asyncio",
+        "GIL",
+        "decorator",
+        "coroutine",
+        "pip"
+      ]
+    },
+    {
+      "id": "backend-go",
+      "name": "Go 后端",
+      "file": "domains/backend-go.json",
+      "count": 37,
+      "fingerprints": [
+        "goroutine",
+        "channel",
+        "slice",
+        "go mod",
+        "defer",
+        "struct",
+        "Golang"
+      ]
+    },
+    {
+      "id": "backend-node",
+      "name": "Node.js",
+      "file": "domains/backend-node.json",
+      "count": 34,
+      "fingerprints": [
+        "Node.js",
+        "npm",
+        "Express",
+        "event loop",
+        "require",
+        "middleware",
+        "package.json"
+      ]
+    },
+    {
+      "id": "backend-other",
+      "name": "Rust / C# / PHP",
+      "file": "domains/backend-other.json",
+      "count": 48,
+      "fingerprints": [
+        "Rust",
+        "Cargo",
+        "ownership",
+        "borrow",
+        "trait",
+        "lifetime",
+        ".NET",
+        "Laravel",
+        "Rails"
+      ]
+    },
+    {
+      "id": "db",
+      "name": "数据库",
+      "file": "domains/db.json",
+      "count": 63,
+      "fingerprints": [
+        "SQL",
+        "index",
+        "query",
+        "transaction",
+        "primary key",
+        "sharding",
+        "replica",
+        "isolation level",
+        "table"
+      ]
+    },
+    {
+      "id": "net",
+      "name": "网络",
+      "file": "domains/net.json",
+      "count": 60,
+      "fingerprints": [
+        "HTTP",
+        "TCP",
+        "DNS",
+        "TLS",
+        "handshake",
+        "header",
+        "WebSocket",
+        "protocol",
+        "packet"
+      ]
+    },
+    {
+      "id": "devops",
+      "name": "云原生 / 运维",
+      "file": "domains/devops.json",
+      "count": 69,
+      "fingerprints": [
+        "Docker",
+        "Kubernetes",
+        "pod",
+        "kubectl",
+        "manifest",
+        "rollout",
+        "Helm",
+        "CI/CD",
+        "container"
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "云服务",
+      "file": "domains/cloud.json",
+      "count": 47,
+      "fingerprints": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "Serverless",
+        "IAM",
+        "Lambda",
+        "S3",
+        "region",
+        "bucket"
+      ]
+    },
+    {
+      "id": "ai-ml",
+      "name": "AI / ML",
+      "file": "domains/ai-ml.json",
+      "count": 72,
+      "fingerprints": [
+        "LLM",
+        "Transformer",
+        "embedding",
+        "fine-tuning",
+        "inference",
+        "prompt",
+        "RAG",
+        "token",
+        "dataset"
+      ]
+    },
+    {
+      "id": "algo",
+      "name": "算法",
+      "file": "domains/algo.json",
+      "count": 50,
+      "fingerprints": [
+        "complexity",
+        "binary search",
+        "hash table",
+        "linked list",
+        "dynamic programming",
+        "graph",
+        "sorting"
+      ]
+    },
+    {
+      "id": "os",
+      "name": "操作系统",
+      "file": "domains/os.json",
+      "count": 46,
+      "fingerprints": [
+        "kernel",
+        "syscall",
+        "page fault",
+        "virtual memory",
+        "file descriptor",
+        "context switch",
+        "scheduler"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "安全",
+      "file": "domains/security.json",
+      "count": 51,
+      "fingerprints": [
+        "XSS",
+        "CSRF",
+        "SQL injection",
+        "OAuth",
+        "CVE",
+        "encryption",
+        "vulnerability",
+        "authentication"
+      ]
+    },
+    {
+      "id": "mobile",
+      "name": "移动端",
+      "file": "domains/mobile.json",
+      "count": 38,
+      "fingerprints": [
+        "Android",
+        "iOS",
+        "SwiftUI",
+        "Flutter",
+        "React Native",
+        "Activity",
+        "ViewController",
+        "APK"
+      ]
+    }
+  ]
+}

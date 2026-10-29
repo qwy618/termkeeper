@@ -1,0 +1,87 @@
+/* TermKeeper 译文样式 —— 由浏览器注入，不受页面 CSP 限制 */
+
+/* ---------------- 对照模式：译文另起一块，蓝色左边线 ---------------- */
+
+html[data-tk-mode='both'] .tk-trans {
+  display: block !important;
+  margin: 0.35em 0 0.15em 0 !important;
+  padding: 0 0 0 0.7em !important;
+  border-left: 2px solid var(--tk-accent, #5b6cf9) !important;
+  color: var(--tk-fg, #3a3f4b) !important;
+  font-size: 0.96em !important;
+  line-height: 1.72 !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  text-indent: 0 !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  opacity: 0.96 !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  background: transparent !important;
+}
+
+/* ---------------- 仅译文模式：原位替换，看起来就是原文变成中文 ---------------- */
+
+/* 不设边框/内边距/字号，让译文完全继承所在元素的排版 —— 这样替换前后
+   行高、字号、缩进都不变，页面不会出现"换了一段样式"的跳动。 */
+html[data-tk-mode='translated'] .tk-trans {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  text-align: inherit !important;
+  text-indent: inherit !important;
+  text-transform: none !important;
+  opacity: 1 !important;
+  white-space: inherit !important;
+  word-break: break-word !important;
+}
+
+/* 兜底：模式标记还没写上时（渲染早于初始化）按对照样式走，至少不会错位 */
+
+/* ---------------- 失败态 ---------------- */
+
+html[data-tk-mode='both'] .tk-trans.tk-error {
+  border-left-color: #d9534f !important;
+  color: #b03a36 !important;
+  font-size: 0.9em !important;
+}
+
+html[data-tk-mode='translated'] .tk-trans.tk-error {
+  border-bottom: 1px dashed #d9534f !important;
+  color: #b03a36 !important;
+}
+
+.tk-trans .tk-retry {
+  margin-left: 0.5em;
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--tk-accent, #5b6cf9);
+  font-size: 0.9em;
+}
+
+/* 仅原文模式：隐藏译文（此时原文已被放回，译文节点也已摘除，此为兜底） */
+html[data-tk-mode='original'] .tk-trans {
+  display: none !important;
+}
+
+/* 进度药丸上的呼吸点 */
+@keyframes tk-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.72); opacity: 0.55; }
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-tk-mode='both'] .tk-trans {
+    --tk-fg: #c9cfdb;
+    --tk-accent: #7b8cff;
+  }
+  .tk-trans.tk-error {
+    color: #ff9b96 !important;
+  }
+}

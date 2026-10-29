@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="options.css" />
+  <title>TermKeeper 设置</title>
+</head>
+<body>
+  <div class="wrap">
+    <header class="head">
+      <div class="logo"></div>
+      <div>
+        <h1>TermKeeper · 术语守护</h1>
+        <p class="sub">技术文档双语对照翻译 —— 专有名词不译、代码不污染、原文永远保留</p>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="engine">翻译引擎</button>
+      <button class="tab" data-tab="terms">术语表</button>
+      <button class="tab" data-tab="display">显示</button>
+      <button class="tab" data-tab="usage">用量与缓存</button>
+    </nav>
+
+    <!-- 引擎 -->
+    <section class="panel active" id="panel-engine">
+      <div class="card">
+        <h2>默认引擎</h2>
+        <div class="field">
+          <label>翻译引擎</label>
+          <select id="opt-mode">
+            <option value="fast">快速 · 必应免费通道（零配置）</option>
+            <option value="smart">AI 精修 · OpenAI 兼容接口</option>
+          </select>
+          <p class="hint">快速引擎零配置可用；AI 精修需要下面的配置，能理解上下文和标题路径，术语更准。</p>
+        </div>
+        <div class="field">
+          <label>技术领域</label>
+          <select id="opt-domain">
+            <option value="auto">自动判断（推荐）</option>
+          </select>
+          <p class="hint">决定加载哪套领域词表。自动判断已按域名、标题、正文投票，准确度约 9 成；锁定后强制只用该领域词表。</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>AI 引擎配置</h2>
+        <p class="hint">支持任何 OpenAI 兼容接口：DeepSeek、OpenAI、Kimi、通义、本地 Ollama 等。</p>
+        <div class="field">
+          <label>API Base URL</label>
+          <input id="opt-baseurl" type="text" placeholder="https://api.deepseek.com/v1" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label>API Key</label>
+          <input id="opt-apikey" type="password" placeholder="sk-..." autocomplete="off" />
+          <p class="hint">仅保存在本机 <code>chrome.storage.local</code>，不会上传到任何地方。也可以填本地代理地址（如 one-api / Ollama）。</p>
+        </div>
+        <div class="field">
+          <label>模型名</label>
+          <input id="opt-model" type="text" placeholder="deepseek-chat" autocomplete="off" />
+        </div>
+        <div class="row-actions">
+          <button class="btn" id="btn-probe-smart">测试 AI 引擎</button>
+          <button class="btn" id="btn-probe-fast">测试免费引擎</button>
+          <span class="probe-result" id="probe-result"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>常用配置示例</h2>
+        <table class="mini">
+          <thead>
+            <tr><th>服务</th><th>Base URL</th><th>模型名</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DeepSeek</td><td><code>https://api.deepseek.com/v1</code></td><td><code>deepseek-chat</code></td></tr>
+            <tr><td>OpenAI</td><td><code>https://api.openai.com/v1</code></td><td><code>gpt-4o-mini</code></td></tr>
+            <tr><td>本地 Ollama</td><td><code>http://127.0.0.1:11434/v1</code></td><td><code>qwen2.5:7b</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 术语表 -->
+    <section class="panel" id="panel-terms">
+      <div class="card">
+        <h2>添加个人术语</h2>
+        <p class="hint">个人术语优先级最高，同词永远以你的设定为准；改动后所有页面立即生效。</p>
+        <div class="term-form">
+          <input id="term-input" type="text" placeholder="术语，如 hydration" />
+          <select id="term-strategy">
+            <option value="keep">保持原文（不翻译）</option>
+            <option value="translateAs">固定译法</option>
+            <option value="annotate">保留 + 首次加注</option>
+          </select>
+          <input id="term-target" type="text" placeholder="中文（固定译法/注释内容）" />
+          <label class="chk"><input id="term-cs" type="checkbox" checked /> 区分大小写</label>
+          <button class="btn primary" id="btn-add-term">添加</button>
+        </div>
+        <div class="msg" id="term-msg"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>我的术语（<span id="user-term-count">0</span>）</h2>
+          <div class="row-actions">
+            <button class="btn" id="btn-import">导入 JSON</button>
+            <button class="btn" id="btn-export">导出 JSON</button>
+            <input id="file-import" type="file" accept="application/json" hidden />
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="grid">
+            <thead>
+              <tr><th>术语</th><th>策略</th><th>译文/注释</th><th>大小写</th><th></th></tr>
+            </thead>
+            <tbody id="user-terms"></tbody>
+          </table>
+          <p class="empty" id="user-terms-empty">还没有个人术语。翻译后在译文上遇到的错译，都可以在这里纠正。</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>内置词典</h2>
+          <select id="builtin-domain"></select>
+        </div>
+        <p class="hint">内置词条只收录"确实被机器翻错过"的词。你也可以把内置词条复制到个人术语覆盖它。</p>
+        <div class="table-wrap tall">
+          <table class="grid">
+            <thead>
+              <tr><th>术语</th><th>策略</th><th>译文/注释</th></tr>
+            </thead>
+            <tbody id="builtin-terms"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 显示 -->
+    <section class="panel" id="panel-display">
+      <div class="card">
+        <h2>阅读形态</h2>
+        <label class="switch-row">
+          <span>
+            <strong>打开网页自动翻译</strong>
+            <em>开启后，每个网页加载完会自动开始翻译（仍可在弹窗里随时关闭当前页）。</em>
+          </span>
+          <input id="opt-auto" type="checkbox" />
+        </label>
+        <div class="field">
+          <label>默认显示</label>
+          <select id="opt-display">
+            <option value="both">原文 + 译文（对照）</option>
+            <option value="translated">仅译文</option>
+            <option value="original">仅原文</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>强调色</label>
+          <input id="opt-accent" type="color" value="#5b6cf9" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>术语保护策略</h2>
+        <label class="switch-row">
+          <span>
+            <strong>专有名词兜底规则</strong>
+            <em>未收录的新框架/产品名，只要形态像专有名词就保持原文。开启覆盖率更高，但可能少量漏译。</em>
+          </span>
+          <input id="opt-guard" type="checkbox" />
+        </label>
+        <label class="switch-row">
+          <span>
+            <strong>术语首次出现加注</strong>
+            <em>如 Bean（受 IoC 容器管理的对象）。默认关闭，避免打断阅读节奏。</em>
+          </span>
+          <input id="opt-annotate" type="checkbox" />
+        </label>
+        <label class="switch-row">
+          <span>
+            <strong>禁用词替换兜底</strong>
+            <em>当占位符机制失效时，把"春天"这类错译强行改回 Spring。极少数情况下可能误伤。</em>
+          </span>
+          <input id="opt-forbid" type="checkbox" />
+        </label>
+      </div>
+    </section>
+
+    <!-- 用量 -->
+    <section class="panel" id="panel-usage">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num" id="st-chars">0</div><div class="lbl">累计翻译字符</div></div>
+        <div class="stat-card"><div class="num" id="st-cache">0</div><div class="lbl">缓存命中次数</div></div>
+        <div class="stat-card"><div class="num" id="st-llm">0</div><div class="lbl">AI 引擎字符</div></div>
+        <div class="stat-card"><div class="num" id="st-fail">0</div><div class="lbl">失败次数</div></div>
+      </div>
+      <div class="card">
+        <h2>本地缓存</h2>
+        <p class="hint">译文按段落缓存，同一页第二次打开几乎零请求。<span id="cache-info"></span></p>
+        <div class="row-actions">
+          <button class="btn" id="btn-cache-info">查看缓存体积</button>
+          <button class="btn danger" id="btn-clear-cache">清空缓存</button>
+          <button class="btn" id="btn-reset-stats">重置统计</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
